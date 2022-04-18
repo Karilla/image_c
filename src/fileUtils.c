@@ -1,13 +1,8 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <stdint.h>
-#include <string.h>
+#include "fileUtils.h"
 
-int main()
-{
+uint8_t* fileToBuffer(char* fileName){
     FILE* fileHandler;
-
-    fileHandler = fopen("test.png", "r");
+    fileHandler = fopen(fileName, "r");
 
     uint8_t* buffer;
 
@@ -28,17 +23,11 @@ int main()
     }
  
     for (int i = 0; i < size; i++) buffer[i] = fgetc(fileHandler);
-
-    uint8_t pngFileDesc[8] = {137,80,78,71,13,10,26,10};
-    if(memcmp(buffer,pngFileDesc,8) == 0){
-        printf("C'est un png !!!\n");
-    }
-    else{
-        printf("Ce n'est pas un png :(\n");
-    }
-
     fclose(fileHandler);
-    free(buffer);
+    return buffer;
+}
 
-    return 0;
+bool isPNGFile(uint8_t* buffer){
+    uint8_t pngFileDesc[8] = {137,80,78,71,13,10,26,10};
+    return (memcmp(buffer,pngFileDesc,8) == 0);
 }
