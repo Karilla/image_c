@@ -11,7 +11,7 @@ int main()
     
     if(isPNGFile(buffer)){
         printf("C'est un png !!!\n");
-        getWidth(buffer);
+        printf("%d\n",getHeight(buffer));
         getHeight(buffer);
     }
     else{

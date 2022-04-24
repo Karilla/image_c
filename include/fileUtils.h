@@ -6,12 +6,11 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-
 /* Table of CRCs of all 8-bit messages. */
 unsigned long crc_table[256];
    
 /* Flag: has the table been computed? Initially false. */
-int crc_table_computed = 0;
+extern int crc_table_computed;
 
 unsigned long update_crc(unsigned long crc, unsigned char *buf,
                             int len);

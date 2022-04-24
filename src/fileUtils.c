@@ -1,5 +1,7 @@
 #include "fileUtils.h"
 
+int crc_table_computed = 0;
+
 uint8_t* fileToBuffer(char* fileName){
     FILE* fileHandler;
     fileHandler = fopen(fileName, "r");
@@ -33,24 +35,24 @@ bool isPNGFile(uint8_t* buffer){
 }
 
    
-   /* Make the table for a fast CRC. */
-   void make_crc_table(void)
-   {
-     unsigned long c;
-     int n, k;
+/* Make the table for a fast CRC. */
+void make_crc_table(void)
+{
+  unsigned long c;
+  int n, k;
    
-     for (n = 0; n < 256; n++) {
-       c = (unsigned long) n;
-       for (k = 0; k < 8; k++) {
-         if (c & 1)
-           c = 0xedb88320L ^ (c >> 1);
-         else
-           c = c >> 1;
-       }
-       crc_table[n] = c;
-     }
-     crc_table_computed = 1;
-   }
+    for (n = 0; n < 256; n++) {
+      c = (unsigned long) n;
+      for (k = 0; k < 8; k++) {
+        if (c & 1)
+          c = 0xedb88320L ^ (c >> 1);
+        else
+          c = c >> 1;
+      }
+      crc_table[n] = c;
+    }
+    crc_table_computed = 1;
+  }
    
    /* Update a running CRC with the bytes buf[0..len-1]--the CRC
       should be initialized to all 1's, and the transmitted value
