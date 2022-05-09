@@ -1,0 +1,7 @@
+- Extract IDAT information
+- Inflate png DATA
+- Read Data from PNG
+- Create Bitmap format
+- Read Bitmap format
+- Edit bitmapformat
+- Compress bmp to png

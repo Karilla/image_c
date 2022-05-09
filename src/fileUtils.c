@@ -18,7 +18,7 @@ uint8_t* fileToBuffer(char* fileName){
     int size = ftell(fileHandler);
     rewind(fileHandler);
 
-    buffer = (uint8_t*)malloc(size * sizeof(uint8_t) + 2);
+    buffer = (uint8_t*)malloc(size * sizeof(uint8_t));
     if(buffer == NULL){
         printf("Error on memory allocation\n");
         exit(EXIT_FAILURE);
@@ -53,11 +53,6 @@ void make_crc_table(void)
     }
     crc_table_computed = 1;
   }
-   
-   /* Update a running CRC with the bytes buf[0..len-1]--the CRC
-      should be initialized to all 1's, and the transmitted value
-      is the 1's complement of the final running CRC (see the
-      crc() routine below)). */
    
    unsigned long update_crc(unsigned long crc, unsigned char *buf,
                             int len)
